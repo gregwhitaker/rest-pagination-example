@@ -9,7 +9,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @JsonPropertyOrder({
-        "id"
+        "id",
+        "lastName",
+        "firstName",
+        "department",
+        "phone",
+        "email",
+        "addresses",
+        "salary"
 })
 public class GetEmployeeResponse {
 
@@ -24,11 +31,11 @@ public class GetEmployeeResponse {
         response.setPhone(new HashMap<>());
 
         if (employee.getHomePhone() != null) {
-            response.getPhone().put("home", employee.getHomePhone());
+            response.getPhone().put("home", "+1-" + employee.getHomePhone());
         }
 
         if (employee.getWorkPhone() != null) {
-            response.getPhone().put("work", employee.getWorkPhone());
+            response.getPhone().put("work", "+1-" + employee.getWorkPhone());
         }
 
         // emails
@@ -44,13 +51,14 @@ public class GetEmployeeResponse {
 
         // addresses
         response.setAddresses(new HashMap<>());
+        uriBuilder.path("/employees/{id}/addresses/{type}");
 
         if (employee.getHomeAddressId() != null) {
-            response.getEmail().put("home", uriBuilder.path("/employees/{id}/addresses/home").buildAndExpand(employee.getId()).toUriString());
+            response.getAddresses().put("home", uriBuilder.buildAndExpand(employee.getId(), "home").toString());
         }
 
         if (employee.getWorkAddressId() != null) {
-            response.getEmail().put("work", uriBuilder.path("/employees/{id}/addresses/work").buildAndExpand(employee.getId()).toUriString());
+            response.getAddresses().put("work", uriBuilder.buildAndExpand(employee.getId(), "work").toString());
         }
 
         response.setSalary(Double.toString(employee.getSalary()));

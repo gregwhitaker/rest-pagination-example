@@ -2,7 +2,9 @@ package example.employee.config.settings;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
+@Primary
 @Configuration
 @ConfigurationProperties(prefix = "app.database")
 public class DatabaseSettings {
