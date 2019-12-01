@@ -1,8 +1,8 @@
-package example.employee.controller.config;
+package example.employee.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import example.employee.controller.config.settings.DatabaseSettings;
+import example.employee.config.settings.DatabaseSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
