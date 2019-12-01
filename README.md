@@ -1,5 +1,5 @@
 # rest-pagination-example
-An example of JDBC pagination in a RESTful webservice.
+An example of JDBC pagination, using limit and offset queries, in a RESTful webservice.
 
 ## Building the Example
 Run the following command to build the example:
@@ -12,6 +12,10 @@ Follow the steps below to run the example:
 1. Run the following command to start the example service:
 
         ./gradlew bootRun
+        
+2. Run the following command to query a list of all of the employees in the company:
+
+        curl http://localhost:8080/employees
 
 ## License
 MIT License
