@@ -2,6 +2,9 @@ package example.employee.controller.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+/**
+ * HATEOS resource link.
+ */
 @JsonPropertyOrder({
         "rel",
         "type",
