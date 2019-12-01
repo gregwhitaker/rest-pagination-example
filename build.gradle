@@ -53,7 +53,7 @@ task buildImage(type: DockerBuildImage, dependsOn: build) {
 // Local Development
 task bootRunLocal {
     bootRun.configure {
-        systemProperty "spring.profiles.active", 'local'
+        systemProperty 'spring.profiles.active', 'local'
     }
 }
 bootRunLocal.finalizedBy bootRun
