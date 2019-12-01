@@ -1,7 +1,10 @@
 package example.employee.service;
 
+import example.employee.data.Employee;
+import example.employee.data.EmployeeDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,7 +13,14 @@ import java.util.List;
 public class EmployeeService {
     private static final Logger LOG = LoggerFactory.getLogger(EmployeeService.class);
 
-    public List<?> getEmployees(int offset, int limit) {
+    @Autowired
+    private EmployeeDao employeeDao;
+
+    public Employee getEmployee(long id) {
+        return employeeDao.getEmployee(id);
+    }
+
+    public List<Employee> getEmployees(int offset, int limit) {
         return null;
     }
 }

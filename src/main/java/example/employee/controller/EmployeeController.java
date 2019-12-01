@@ -2,6 +2,7 @@ package example.employee.controller;
 
 import example.employee.controller.model.GetEmployeeResponse;
 import example.employee.controller.model.GetEmployeesResponse;
+import example.employee.data.Employee;
 import example.employee.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,13 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/employees/{id}")
-    public ResponseEntity<GetEmployeeResponse> getEmployee(@PathVariable("id") long id) {
-        return null;
+    public ResponseEntity<?> getEmployee(@PathVariable("id") long id) {
+        Employee employee = employeeService.getEmployee(id);
+
+        if (employee != null) {
+            return ResponseEntity.ok(GetEmployeeResponse.from(employee));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

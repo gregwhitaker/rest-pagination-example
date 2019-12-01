@@ -17,7 +17,7 @@ public class EmployeeDao {
 
     @Autowired
     private DataSource dataSource;
-    
+
     public Employee getEmployee(long id) {
         try (Connection conn = dataSource.getConnection()) {
             final String sql = "SELECT e.*, d.name AS department_name FROM employees e JOIN departments d on e.department = d.id WHERE e.id = ?";
