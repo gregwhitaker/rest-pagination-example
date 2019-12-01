@@ -2,7 +2,7 @@ package example.employee.controller;
 
 import example.employee.controller.model.GetEmployeeResponse;
 import example.employee.controller.model.GetEmployeesResponse;
-import example.employee.data.Employee;
+import example.employee.data.model.Employee;
 import example.employee.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

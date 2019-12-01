@@ -1,7 +1,7 @@
 package example.employee.controller.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import example.employee.data.Employee;
+import example.employee.data.model.Employee;
 
 import java.util.ArrayList;
 import java.util.List;

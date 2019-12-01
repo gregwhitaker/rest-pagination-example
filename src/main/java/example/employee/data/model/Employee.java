@@ -1,4 +1,4 @@
-package example.employee.data;
+package example.employee.data.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
