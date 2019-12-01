@@ -35,8 +35,8 @@ public class Employee {
     private String workPhone;
     private String homeEmail;
     private String workEmail;
-    private long homeAddressId;
-    private long workAddressId;
+    private Long homeAddressId;
+    private Long workAddressId;
     private double salary;
 
     public long getId() {
@@ -119,19 +119,19 @@ public class Employee {
         this.workEmail = workEmail;
     }
 
-    public long getHomeAddressId() {
+    public Long getHomeAddressId() {
         return homeAddressId;
     }
 
-    public void setHomeAddressId(long homeAddressId) {
+    public void setHomeAddressId(Long homeAddressId) {
         this.homeAddressId = homeAddressId;
     }
 
-    public long getWorkAddressId() {
+    public Long getWorkAddressId() {
         return workAddressId;
     }
 
-    public void setWorkAddressId(long workAddressId) {
+    public void setWorkAddressId(Long workAddressId) {
         this.workAddressId = workAddressId;
     }
 

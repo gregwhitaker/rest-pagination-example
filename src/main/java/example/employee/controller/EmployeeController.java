@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 public class EmployeeController {
@@ -39,11 +40,12 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/employees/{id}")
-    public ResponseEntity<?> getEmployee(@PathVariable("id") long id) {
+    public ResponseEntity<?> getEmployee(@PathVariable("id") long id,
+                                         UriComponentsBuilder uriBuilder) {
         Employee employee = employeeService.getEmployee(id);
 
         if (employee != null) {
-            return ResponseEntity.ok(GetEmployeeResponse.from(employee));
+            return ResponseEntity.ok(GetEmployeeResponse.from(employee, uriBuilder));
         } else {
             return ResponseEntity.notFound().build();
         }
