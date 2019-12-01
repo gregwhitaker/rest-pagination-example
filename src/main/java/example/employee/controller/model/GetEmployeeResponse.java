@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import example.employee.data.Employee;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 @JsonPropertyOrder({
@@ -61,7 +63,11 @@ public class GetEmployeeResponse {
             response.getAddresses().put("work", uriBuilder.buildAndExpand(employee.getId(), "work").toString());
         }
 
-        response.setSalary(Double.toString(employee.getSalary()));
+        // salary
+        Locale locale = new Locale("en", "US");
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+
+        response.setSalary(currencyFormatter.format(employee.getSalary()));
 
         return response;
     }
