@@ -29,15 +29,11 @@ public class EmployeeController {
      * @return
      */
     @GetMapping("/employees")
-    public ResponseEntity<GetEmployeesResponse> getEmployees(@RequestParam(value = "offset", required = false, defaultValue = "0") int offset,
-                                                             @RequestParam(value = "limit", required = false, defaultValue = "25") int limit) {
-        GetEmployeesResponse response = new GetEmployeesResponse();
-
-        employeeService.getEmployees(offset, limit).forEach(o -> {
-
-        });
-
-        return ResponseEntity.ok(response);
+    public ResponseEntity<GetEmployeesResponse> getEmployees(@RequestParam(value = "offset", required = false, defaultValue = "0") long offset,
+                                                             @RequestParam(value = "limit", required = false, defaultValue = "25") long limit,
+                                                             UriComponentsBuilder uriBuilder) {
+        return ResponseEntity.ok()
+                .body(GetEmployeesResponse.from(employeeService.getEmployees(offset, limit), uriBuilder));
     }
 
     /**

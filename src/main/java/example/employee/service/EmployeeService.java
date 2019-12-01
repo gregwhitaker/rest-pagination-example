@@ -20,7 +20,7 @@ public class EmployeeService {
         return employeeDao.getEmployee(id);
     }
 
-    public List<Employee> getEmployees(int offset, int limit) {
-        return null;
+    public List<Employee> getEmployees(long offset, long limit) {
+        return employeeDao.getEmployees(offset, limit);
     }
 }
