@@ -1,5 +1,7 @@
 package example.employee.controller;
 
+import example.employee.controller.model.GetEmployeeAddressResponse;
+import example.employee.data.model.EmployeeAddress;
 import example.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,12 +18,24 @@ public class AddressController {
     @GetMapping(value = "/employees/{id}/addresses/home",
                 produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getHomeAddressForEmployee(long employeeId) {
-        return null;
+        EmployeeAddress address = employeeService.getEmployeeHomeAddress(employeeId);
+
+        if (address != null) {
+            return ResponseEntity.ok(GetEmployeeAddressResponse.from(address));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping(value = "/employees/{id}/addresses/work",
                 produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getWorkAddressForEmployee(long employeeId) {
-        return null;
+        EmployeeAddress address = employeeService.getEmployeeWorkAddress(employeeId);
+
+        if (address != null) {
+            return ResponseEntity.ok(GetEmployeeAddressResponse.from(address));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
