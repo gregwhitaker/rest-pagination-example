@@ -1,6 +1,21 @@
 package example.employee.data.model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class EmployeeAddress {
+
+    public static EmployeeAddress from(ResultSet rs) throws SQLException {
+        EmployeeAddress address = new EmployeeAddress();
+        address.setId(rs.getLong("id"));
+        address.setStreet1(rs.getString("street_1"));
+        address.setStreet2(rs.getString("street_2"));
+        address.setCity(rs.getString("city"));
+        address.setState(rs.getString("state"));
+        address.setZipCode(rs.getString("zip_code"));
+
+        return address;
+    }
 
     private long id;
     private String street1;

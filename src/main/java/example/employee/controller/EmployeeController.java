@@ -7,6 +7,7 @@ import example.employee.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +28,8 @@ public class EmployeeController {
      * @param limit total number of records to return for pagination
      * @return
      */
-    @GetMapping("/employees")
+    @GetMapping(value = "/employees",
+                produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GetEmployeesResponse> getEmployees(@RequestParam(value = "offset", required = false, defaultValue = "0") long offset,
                                                              @RequestParam(value = "limit", required = false, defaultValue = "25") long limit) {
         return ResponseEntity.ok()
@@ -40,7 +42,8 @@ public class EmployeeController {
      * @param id employee id
      * @return
      */
-    @GetMapping(value = "/employees/{id}")
+    @GetMapping(value = "/employees/{id}",
+                produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GetEmployeeResponse> getEmployee(@PathVariable("id") long id) {
         Employee employee = employeeService.getEmployee(id);
 

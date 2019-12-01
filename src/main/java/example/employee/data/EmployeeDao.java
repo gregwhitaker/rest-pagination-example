@@ -1,6 +1,7 @@
 package example.employee.data;
 
 import example.employee.data.model.Employee;
+import example.employee.data.model.EmployeeAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,48 @@ public class EmployeeDao {
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving employees from database.", e);
+        }
+    }
+
+    public EmployeeAddress getEmployeeHomeAddress(long employeeId) {
+        try (Connection conn = dataSource.getConnection()) {
+            final String sql = "SELECT e.id AS employee_id, ea.* FROM employees e JOIN employee_addresses ea on e.home_addr = ea.id WHERE e.id = ?";
+
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setLong(1, employeeId);
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return EmployeeAddress.from(rs);
+                    }
+
+                    // Employee address not found
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving employee home address from database.", e);
+        }
+    }
+
+    public EmployeeAddress getEmployeeWorkAddress(long employeeId) {
+        try (Connection conn = dataSource.getConnection()) {
+            final String sql = "SELECT e.id AS employee_id, ea.* FROM employees e JOIN employee_addresses ea on e.work_addr = ea.id WHERE e.id = ?";
+
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setLong(1, employeeId);
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return EmployeeAddress.from(rs);
+                    }
+
+                    // Employee address not found
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving employee work address from database.", e);
         }
     }
 }
