@@ -1,5 +1,14 @@
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
 plugins {
-    id 'java'
+    id "java"
+    id "com.gradle.build-scan" version "3.0"
+    id "net.saliman.properties" version "1.4.6"
+    id "com.adarshr.test-logger" version "2.0.0"
+    id "org.springframework.boot" version "2.1.5.RELEASE"
+    id "io.spring.dependency-management" version "1.0.7.RELEASE"
+    id "com.bmuschko.docker-remote-api" version "3.4.4"
+    id "org.flywaydb.flyway" version "6.0.8"
 }
 
 group 'com.github.gregwhitaker'
@@ -8,9 +17,48 @@ version '0.1.0'
 sourceCompatibility = 1.8
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.zaxxer:HikariCP:3.3.0'
+
+    runtimeOnly 'org.postgresql:postgresql'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mock-server:mockserver-netty:4.1.0'
+    testImplementation 'org.mock-server:mockserver-client-java:4.1.0'
+
+    testRuntime 'org.slf4j:slf4j-simple:1.7.25'
+}
+
+// Gradle Build Scans
+buildScan {
+    termsOfServiceUrl = "https://gradle.com/terms-of-service"
+    termsOfServiceAgree = "yes"
+    publishOnFailure()
+}
+
+// Packaging
+task buildImage(type: DockerBuildImage, dependsOn: build) {
+    buildArgs = ['JAR_FILE': "${bootJar.getArchiveFileName().get()}"]
+    dockerFile = file("${projectDir}/Dockerfile")
+    inputDir = file("${projectDir}")
+    tags = ["gregnetifi/${projectDir.name}", "gregnetifi/${projectDir.name}:${version}"]
+}
+
+// Local Development
+task bootRunLocal {
+    bootRun.configure {
+        systemProperty "spring.profiles.active", 'local'
+    }
+}
+bootRunLocal.finalizedBy bootRun
+
+flyway {
+    url = 'jdbc:postgresql://localhost:5432/postgres'
+    user = 'postgres'
 }
