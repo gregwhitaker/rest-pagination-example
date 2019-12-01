@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller for accessing employee information.
+ */
 @RestController
 public class EmployeeController {
     private static final Logger LOG = LoggerFactory.getLogger(EmployeeController.class);
@@ -26,7 +29,7 @@ public class EmployeeController {
      *
      * @param offset number of records to offset for pagination
      * @param limit total number of records to return for pagination
-     * @return
+     * @return list of employee's info
      */
     @GetMapping(value = "/employees",
                 produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,7 +43,7 @@ public class EmployeeController {
      * Get a single employee from the system.
      *
      * @param id employee id
-     * @return
+     * @return employee info
      */
     @GetMapping(value = "/employees/{id}",
                 produces = MediaType.APPLICATION_JSON_VALUE)
