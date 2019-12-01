@@ -23,7 +23,7 @@ CREATE TABLE employees (
     work_phone  VARCHAR(50)     NOT NULL,
     home_email  VARCHAR(250),
     work_email  VARCHAR(250)    NOT NULL,
-    home_addr   BIGINT          REFERENCES employee_addresses(id) NOT NULL ON DELETE CASCADE,
+    home_addr   BIGINT          REFERENCES employee_addresses(id) ON DELETE CASCADE,
     work_addr   BIGINT          REFERENCES employee_addresses(id) NOT NULL,
     salary      NUMERIC         NOT NULL
 );
