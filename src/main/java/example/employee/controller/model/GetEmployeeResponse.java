@@ -3,7 +3,6 @@ package example.employee.controller.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import example.employee.data.Employee;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.text.NumberFormat;
 import java.util.HashMap;
