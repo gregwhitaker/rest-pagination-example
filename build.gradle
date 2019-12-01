@@ -24,6 +24,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.zaxxer:HikariCP:3.3.0'
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.springframework:spring-jdbc:3.0.3.RELEASE'
 
     runtimeOnly 'org.postgresql:postgresql'
 

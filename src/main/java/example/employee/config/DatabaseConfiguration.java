@@ -5,9 +5,11 @@ import com.zaxxer.hikari.HikariDataSource;
 import example.employee.config.settings.DatabaseSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.flyway.FlywayDataSource;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
@@ -19,6 +21,8 @@ import javax.sql.DataSource;
 public class DatabaseConfiguration {
     private static final Logger LOG = LoggerFactory.getLogger(DatabaseConfiguration.class);
 
+    @Primary
+    @FlywayDataSource
     @Bean
     public DataSource dataSource(DatabaseSettings settings) {
         if (StringUtils.isEmpty(settings.getJdbcUrl())) {
