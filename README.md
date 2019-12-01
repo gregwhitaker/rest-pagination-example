@@ -23,7 +23,106 @@ Follow the steps below to run the example:
 
         curl http://localhost:8080/employees?offset=25&limit=3
         
-    If successful, you will retrieve employee records `26` - `28`.
+    If successful, you will retrieve employee records `26` - `28`:
+
+        {
+          "count": 3,
+          "employees": [
+            {
+              "id": 26,
+              "last_name": "Rodenborch",
+              "first_name": "Skippie",
+              "department": "Manufacturing",
+              "phone": {
+                "work": "+1-673-840-0729",
+                "home": "+1-462-690-4108"
+              },
+              "email": {
+                "work": "srodenborchp@dummycorp.com",
+                "home": "srodenborchp@is.gd"
+              },
+              "addresses": {
+                "work": {
+                  "rel": "employee",
+                  "type": "GET",
+                  "href": "/employees/26/addresses/work"
+                },
+                "home": {
+                  "rel": "employee",
+                  "type": "GET",
+                  "href": "/employees/26/addresses/home"
+                }
+              },
+              "salary": "$144,661.34"
+            },
+            {
+              "id": 27,
+              "last_name": "Casari",
+              "first_name": "Carlota",
+              "department": "Accounting",
+              "phone": {
+                "work": "+1-233-245-3814",
+                "home": "+1-911-995-9861"
+              },
+              "email": {
+                "work": "ccasariq@dummycorp.com",
+                "home": "ccasariq@webs.com"
+              },
+              "addresses": {
+                "work": {
+                  "rel": "employee",
+                  "type": "GET",
+                  "href": "/employees/27/addresses/work"
+                },
+                "home": {
+                  "rel": "employee",
+                  "type": "GET",
+                  "href": "/employees/27/addresses/home"
+                }
+              },
+              "salary": "$130,065.98"
+            },
+            {
+              "id": 28,
+              "last_name": "Marklin",
+              "first_name": "Yasmin",
+              "department": "Manufacturing",
+              "phone": {
+                "work": "+1-271-929-3657",
+                "home": "+1-512-483-6872"
+              },
+              "email": {
+                "work": "ymarklinr@dummycorp.com",
+                "home": "ymarklinr@weebly.com"
+              },
+              "addresses": {
+                "work": {
+                  "rel": "employee",
+                  "type": "GET",
+                  "href": "/employees/28/addresses/work"
+                },
+                "home": {
+                  "rel": "employee",
+                  "type": "GET",
+                  "href": "/employees/28/addresses/home"
+                }
+              },
+              "salary": "$155,269.80"
+            }
+          ],
+          "links": [
+            {
+              "rel": "prev",
+              "type": "GET",
+              "href": "/employees?offset=22&limit=3"
+            },
+            {
+              "rel": "next",
+              "type": "GET",
+              "href": "/employees?offset=28&limit=3"
+            }
+          ]
+        }
 
 ## License
 MIT License
