@@ -1,4 +1,4 @@
-package example.employee.controller;
+package example.employee.controller.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
