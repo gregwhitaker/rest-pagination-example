@@ -35,8 +35,23 @@ public class EmployeeController {
                 produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GetEmployeesResponse> getEmployees(@RequestParam(value = "offset", required = false, defaultValue = "0") long offset,
                                                              @RequestParam(value = "limit", required = false, defaultValue = "25") long limit) {
+        // Enforce minimum offset
+        if (offset < 0) {
+            offset = 0;
+        }
+
+        // Enforce minimum limit
+        if (limit < 0) {
+            limit = 25;
+        }
+
+        // Enforce maximum limit
+        if (limit > 100) {
+            limit = 100;
+        }
+
         return ResponseEntity.ok()
-                .body(GetEmployeesResponse.from(employeeService.getEmployees(offset, limit)));
+                .body(GetEmployeesResponse.from(employeeService.getEmployees(offset, limit), offset, limit));
     }
 
     /**
