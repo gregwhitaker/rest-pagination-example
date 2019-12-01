@@ -30,26 +30,23 @@ public class EmployeeController {
      */
     @GetMapping("/employees")
     public ResponseEntity<GetEmployeesResponse> getEmployees(@RequestParam(value = "offset", required = false, defaultValue = "0") long offset,
-                                                             @RequestParam(value = "limit", required = false, defaultValue = "25") long limit,
-                                                             UriComponentsBuilder uriBuilder) {
+                                                             @RequestParam(value = "limit", required = false, defaultValue = "25") long limit) {
         return ResponseEntity.ok()
-                .body(GetEmployeesResponse.from(employeeService.getEmployees(offset, limit), uriBuilder));
+                .body(GetEmployeesResponse.from(employeeService.getEmployees(offset, limit)));
     }
 
     /**
      * Get a single employee from the system.
      *
      * @param id employee id
-     * @param uriBuilder
      * @return
      */
     @GetMapping(value = "/employees/{id}")
-    public ResponseEntity<GetEmployeeResponse> getEmployee(@PathVariable("id") long id,
-                                         UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<GetEmployeeResponse> getEmployee(@PathVariable("id") long id) {
         Employee employee = employeeService.getEmployee(id);
 
         if (employee != null) {
-            return ResponseEntity.ok(GetEmployeeResponse.from(employee, uriBuilder));
+            return ResponseEntity.ok(GetEmployeeResponse.from(employee));
         } else {
             return ResponseEntity.notFound().build();
         }

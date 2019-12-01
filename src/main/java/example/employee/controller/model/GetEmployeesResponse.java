@@ -24,12 +24,12 @@ public class GetEmployeesResponse {
      * @param uriBuilder
      * @return employees response object
      */
-    public static GetEmployeesResponse from(List<Employee> employees, UriComponentsBuilder uriBuilder) {
+    public static GetEmployeesResponse from(List<Employee> employees) {
         GetEmployeesResponse response = new GetEmployeesResponse();
 
         if (employees != null || !employees.isEmpty()) {
             response.setCount(employees.size());
-            employees.forEach(employee -> response.getEmployees().add(GetEmployeeResponse.from(employee, uriBuilder)));
+            employees.forEach(employee -> response.getEmployees().add(GetEmployeeResponse.from(employee)));
         }
 
         return response;

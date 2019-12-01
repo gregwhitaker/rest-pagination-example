@@ -29,10 +29,9 @@ public class GetEmployeeResponse {
      * Transforms the {@link Employee} object from the database into a {@link GetEmployeeResponse} for display to the API user.
      *
      * @param employee employee object from database
-     * @param uriBuilder uri builder for creating links
      * @return employee response object
      */
-    public static GetEmployeeResponse from(final Employee employee, final UriComponentsBuilder uriBuilder) {
+    public static GetEmployeeResponse from(final Employee employee) {
         GetEmployeeResponse response = new GetEmployeeResponse();
         response.setId(employee.getId());
         response.setLastName(employee.getLastName());
@@ -63,14 +62,13 @@ public class GetEmployeeResponse {
 
         // addresses
         response.setAddresses(new HashMap<>());
-        uriBuilder.path("/employees/{id}/addresses/{type}");
 
         if (employee.getHomeAddressId() != null) {
-            response.getAddresses().put("home", uriBuilder.buildAndExpand(employee.getId(), "home").toString());
+            response.getAddresses().put("home", new Link("employee", String.format("/employees/%s/addresses/home", employee.getId())));
         }
 
         if (employee.getWorkAddressId() != null) {
-            response.getAddresses().put("work", uriBuilder.buildAndExpand(employee.getId(), "work").toString());
+            response.getAddresses().put("work", new Link("employee", String.format("/employees/%s/addresses/work", employee.getId())));
         }
 
         // salary
@@ -88,7 +86,7 @@ public class GetEmployeeResponse {
     private String department;
     private Map<String, String> phone;
     private Map<String, String> email;
-    private Map<String, String> addresses;
+    private Map<String, Link> addresses;
     private String salary;
 
     public long getId() {
@@ -139,11 +137,11 @@ public class GetEmployeeResponse {
         this.email = email;
     }
 
-    public Map<String, String> getAddresses() {
+    public Map<String, Link> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(Map<String, String> addresses) {
+    public void setAddresses(Map<String, Link> addresses) {
         this.addresses = addresses;
     }
 
