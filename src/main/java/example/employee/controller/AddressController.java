@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,7 +18,7 @@ public class AddressController {
 
     @GetMapping(value = "/employees/{id}/addresses/home",
                 produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getHomeAddressForEmployee(long employeeId) {
+    public ResponseEntity<?> getHomeAddressForEmployee(@PathVariable("id") long employeeId) {
         EmployeeAddress address = employeeService.getEmployeeHomeAddress(employeeId);
 
         if (address != null) {
@@ -29,7 +30,7 @@ public class AddressController {
 
     @GetMapping(value = "/employees/{id}/addresses/work",
                 produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getWorkAddressForEmployee(long employeeId) {
+    public ResponseEntity<?> getWorkAddressForEmployee(@PathVariable("id") long employeeId) {
         EmployeeAddress address = employeeService.getEmployeeWorkAddress(employeeId);
 
         if (address != null) {
