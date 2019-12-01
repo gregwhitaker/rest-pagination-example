@@ -10,6 +10,7 @@ public class DatabaseSettings {
     private String jdbcUrl;
     private String username;
     private String password;
+    private Integer maxPoolSize;
 
     public String getJdbcUrl() {
         return jdbcUrl;
@@ -33,5 +34,13 @@ public class DatabaseSettings {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getMaxPoolSize() {
+        return maxPoolSize;
+    }
+
+    public void setMaxPoolSize(Integer maxPoolSize) {
+        this.maxPoolSize = maxPoolSize;
     }
 }
