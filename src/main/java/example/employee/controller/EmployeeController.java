@@ -22,14 +22,15 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     /**
+     * Get a list of all employees in the system.
      *
-     * @param offset
-     * @param limit
+     * @param offset number of records to offset for pagination
+     * @param limit total number of records to return for pagination
      * @return
      */
     @GetMapping("/employees")
-    public ResponseEntity<?> getEmployees(@RequestParam(value = "offset", required = false, defaultValue = "0") int offset,
-                                          @RequestParam(value = "limit", required = false, defaultValue = "25") int limit) {
+    public ResponseEntity<GetEmployeesResponse> getEmployees(@RequestParam(value = "offset", required = false, defaultValue = "0") int offset,
+                                                             @RequestParam(value = "limit", required = false, defaultValue = "25") int limit) {
         GetEmployeesResponse response = new GetEmployeesResponse();
 
         employeeService.getEmployees(offset, limit).forEach(o -> {
@@ -39,8 +40,15 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Get a single employee from the system.
+     *
+     * @param id employee id
+     * @param uriBuilder
+     * @return
+     */
     @GetMapping(value = "/employees/{id}")
-    public ResponseEntity<?> getEmployee(@PathVariable("id") long id,
+    public ResponseEntity<GetEmployeeResponse> getEmployee(@PathVariable("id") long id,
                                          UriComponentsBuilder uriBuilder) {
         Employee employee = employeeService.getEmployee(id);
 

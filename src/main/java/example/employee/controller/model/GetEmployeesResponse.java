@@ -7,12 +7,21 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * API response returned when querying multiple employee records.
+ */
 @JsonPropertyOrder({
         "count",
         "employees"
 })
 public class GetEmployeesResponse {
 
+    /**
+     * Transforms a list of {@link Employee} objects from the database into a
+     * @param employees
+     * @param uriBuilder
+     * @return
+     */
     public static GetEmployeesResponse from(List<Employee> employees, UriComponentsBuilder uriBuilder) {
         GetEmployeesResponse response = new GetEmployeesResponse();
 

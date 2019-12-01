@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * API response returned when querying a single employee record.
+ */
 @JsonPropertyOrder({
         "id",
         "lastName",
