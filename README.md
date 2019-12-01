@@ -16,6 +16,14 @@ Follow the steps below to run the example:
 2. Run the following command to query a list of all of the employees in the company:
 
         curl http://localhost:8080/employees
+        
+    If successful, you will receive 25 employee records from the database.
+    
+3. Adjust the `limit` and `offset` query parameters to paginate through the results:
+
+        curl http://localhost:8080/employees?offset=25&limit=3
+        
+    If successful, you will retrieve employee records `26` - `28`.
 
 ## License
 MIT License
