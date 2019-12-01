@@ -17,10 +17,12 @@ import java.util.List;
 public class GetEmployeesResponse {
 
     /**
-     * Transforms a list of {@link Employee} objects from the database into a
-     * @param employees
+     * Transforms a list of {@link Employee} objects from the database into a {@link GetEmployeesResponse} object
+     * to display to the API user.
+     *
+     * @param employees list of employees
      * @param uriBuilder
-     * @return
+     * @return employees response object
      */
     public static GetEmployeesResponse from(List<Employee> employees, UriComponentsBuilder uriBuilder) {
         GetEmployeesResponse response = new GetEmployeesResponse();
