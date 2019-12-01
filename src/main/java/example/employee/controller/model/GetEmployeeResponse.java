@@ -22,6 +22,13 @@ import java.util.Map;
 })
 public class GetEmployeeResponse {
 
+    /**
+     * Transforms the {@link Employee} object from the database into a {@link GetEmployeeResponse} for display to the API user.
+     *
+     * @param employee employee object from database
+     * @param uriBuilder uri builder for creating links
+     * @return employee response object
+     */
     public static GetEmployeeResponse from(final Employee employee, final UriComponentsBuilder uriBuilder) {
         GetEmployeeResponse response = new GetEmployeeResponse();
         response.setId(employee.getId());
