@@ -15,6 +15,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO for accessing employee information.
+ */
 @Component
 public class EmployeeDao {
     private static final Logger LOG = LoggerFactory.getLogger(EmployeeDao.class);
@@ -22,6 +25,12 @@ public class EmployeeDao {
     @Autowired
     private DataSource dataSource;
 
+    /**
+     * Gets information for an employee.
+     *
+     * @param id employee id
+     * @return employee information if found; otherwise <code>null</code>
+     */
     public Employee getEmployee(long id) {
         try (Connection conn = dataSource.getConnection()) {
             final String sql = "SELECT e.*, d.name AS department_name FROM employees e JOIN departments d on e.department = d.id WHERE e.id = ?";
@@ -43,6 +52,13 @@ public class EmployeeDao {
         }
     }
 
+    /**
+     * Gets all employees in the system (paginated).
+     *
+     * @param offset record offset to use for pagination
+     * @param limit record limit to use for pagination
+     * @return a list of employee information
+     */
     public List<Employee> getEmployees(long offset, long limit) {
         try (Connection conn = dataSource.getConnection()) {
             final String sql = "SELECT e.*, d.name AS department_name FROM employees e JOIN departments d on e.department = d.id ORDER BY e.id ASC LIMIT ? OFFSET ?";
@@ -66,6 +82,12 @@ public class EmployeeDao {
         }
     }
 
+    /**
+     * Gets the home address for an employee.
+     *
+     * @param employeeId employee id
+     * @return the employee's home address if found; otherwise <code>null</code>
+     */
     public EmployeeAddress getEmployeeHomeAddress(long employeeId) {
         try (Connection conn = dataSource.getConnection()) {
             final String sql = "SELECT e.id AS employee_id, ea.* FROM employees e JOIN employee_addresses ea on e.home_addr = ea.id WHERE e.id = ?";
@@ -87,6 +109,12 @@ public class EmployeeDao {
         }
     }
 
+    /**
+     * Gets the work address for an employee
+     *
+     * @param employeeId employee id
+     * @return the employee's work address if found; otherwise <code>null</code>
+     */
     public EmployeeAddress getEmployeeWorkAddress(long employeeId) {
         try (Connection conn = dataSource.getConnection()) {
             final String sql = "SELECT e.id AS employee_id, ea.* FROM employees e JOIN employee_addresses ea on e.work_addr = ea.id WHERE e.id = ?";

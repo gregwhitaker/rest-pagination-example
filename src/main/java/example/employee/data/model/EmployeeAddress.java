@@ -3,8 +3,18 @@ package example.employee.data.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Employee address information in the database.
+ */
 public class EmployeeAddress {
 
+    /**
+     * Converts from a {@link ResultSet} to an instance of {@link EmployeeAddress}
+     *
+     * @param rs result set to convert
+     * @return an instance of {@link EmployeeAddress}
+     * @throws SQLException
+     */
     public static EmployeeAddress from(ResultSet rs) throws SQLException {
         EmployeeAddress address = new EmployeeAddress();
         address.setId(rs.getLong("id"));

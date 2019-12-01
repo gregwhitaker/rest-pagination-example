@@ -4,8 +4,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+/**
+ * Employee information in the database.
+ */
 public class Employee {
 
+    /**
+     * Converts a {@link ResultSet} to an instance of {@link Employee}.
+     *
+     * @param rs result set to convert
+     * @return an instance of {@link Employee}
+     * @throws SQLException
+     */
     public static Employee from(ResultSet rs) throws SQLException {
         Employee employee = new Employee();
         employee.setId(rs.getLong("id"));
